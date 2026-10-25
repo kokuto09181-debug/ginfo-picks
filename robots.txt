@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kokuto09181-debug.github.io/ginfo-picks/sitemap.xml
