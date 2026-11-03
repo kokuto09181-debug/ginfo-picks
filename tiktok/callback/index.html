@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TikTok 連携</title>
+<style>body{font-family:system-ui,sans-serif;max-width:40rem;margin:3rem auto;padding:0 16px;color:#222;background:#fff}</style>
+</head>
+<body>
+<h1>TikTok 連携</h1>
+<p id="msg">この PC の管理画面に戻しています…</p>
+<script>
+// TikTok の許可の戻り先（Web）。結果をこの PC の管理画面（127.0.0.1）にそのまま渡すだけで、どこにも送らない。
+(function () {
+  var src = new URLSearchParams(location.search), out = new URLSearchParams();
+  ["code", "state", "scopes", "error", "error_description"].forEach(function (k) {
+    if (src.has(k)) out.set(k, src.get(k));
+  });
+  if (!out.has("state")) { document.getElementById("msg").textContent = "TikTok からの戻りではありません。"; return; }
+  location.replace("http://127.0.0.1:8765/tiktok/callback/?" + out.toString());
+})();
+</script>
+</body>
+</html>
